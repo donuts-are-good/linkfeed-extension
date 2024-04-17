@@ -1,38 +1,63 @@
 const BASE_URL = 'https://linkfeed.net';
 
 document.addEventListener('DOMContentLoaded', async function () {
+  console.log("DOMContentLoaded event fired"); // Log when the DOM is fully loaded
 
- let token = await new Promise(resolve => browser.storage.local.get('token').then(result => resolve(result.token)));
-
- if (token) {
-    try {
-      const response = await fetch(`${BASE_URL}/api/user?token=${token}`, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json'
-        }
+  let token = await new Promise(resolve => {
+      console.log("Attempting to retrieve token from storage"); // Log before retrieving token
+      browser.storage.local.get('token').then(result => {
+          console.log("Token retrieved from storage:", result.token); // Log the retrieved token
+          resolve(result.token);
       });
+  });
 
-      if (response.ok) {
-        const user = await response.json();
-        const userprofile = document.getElementById("userprofile");
-        userprofile.href = `${BASE_URL}/u/${user.userhash}`;
-      } else {
-        console.error('Failed to fetch user object:', response.statusText);
+  if (token) {
+      console.log("Token exists, attempting to fetch user data"); // Log when token exists
+      try {
+          const response = await fetch(`${BASE_URL}/api/user?token=${token}`, {
+              method: 'GET',
+              headers: {
+                  'Content-Type': 'application/json'
+              }
+          });
+
+          console.log("Fetch response received:", response); // Log the fetch response
+
+          if (response.ok) {
+              const user = await response.json();
+              console.log("User data received:", user); // Log the received user data
+              const userprofile = document.getElementById("userprofile");
+              if (userprofile) {
+                  userprofile.href = `${BASE_URL}/u/${user.userhash}`;
+                  console.log("User profile link set:", userprofile.href); // Log the set user profile link
+              } else {
+                  console.error("User profile element not found"); // Log if user profile element is not found
+              }
+          } else {
+              console.error('Failed to fetch user object:', response.statusText);
+          }
+      } catch (error) {
+          console.error('An error occurred while fetching the user object:', error);
       }
-    } catch (error) {
-      console.error('An error occurred while fetching the user object:', error);
-    }
- }
+  } else {
+      console.log("Token does not exist"); // Log if token does not exist
+  }
 
- browser.tabs.query({ active: true, currentWindow: true }).then(tabs => {
-    const tab = tabs[0];
-    const url = tab.url;
+  browser.tabs.query({ active: true, currentWindow: true }).then(tabs => {
+      const tab = tabs[0];
+      const url = tab.url;
+      console.log("Current tab URL:", url); // Log the current tab URL
 
-    const urlInput = document.getElementById('urlInput');
-    urlInput.value = url;
- });
+      const urlInput = document.getElementById('urlInput');
+      if (urlInput) {
+          urlInput.value = url;
+          console.log("URL input value set:", urlInput.value); // Log the set URL input value
+      } else {
+          console.error("URL input element not found"); // Log if URL input element is not found
+      }
+  });
 });
+
 
 document.getElementById('submitBtn').addEventListener('click', async () => {
  try {
