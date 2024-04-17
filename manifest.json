@@ -1,7 +1,7 @@
 {
    "manifest_version": 3,
    "name": "Linkfeed",
-   "version": "1.0",
+   "version": "1.1",
    "description": "Click the Linkfeed button to share a link to your page. Your friends can follow your page in a browser, or with an RSS reader, no signup or email required.",
    "permissions": [
        "storage",
