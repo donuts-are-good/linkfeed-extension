@@ -1,6 +1,6 @@
 # Linkfeed Web Extension
 
-Linkfeed is a web extension that allows users to share links to a public page and feed. Your friends can follow your page in a browser or with an RSS reader, without needing to sign up or provide an email.
+Linkfeed is a browser extension that helps you share links to a public page and feed. Your friends can follow your linkfeed in a browser or with an RSS reader, without needing to sign up or provide an email.
 
 ## Features
 
