@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body class="bg-white dark:bg-black text-black dark:text-white font-sans">
+    <span
+      class="absolute top-3 left-5 text-3xl cursor-default select-none font-bold text-black dark:text-white">linkfeed</span>
+    <span class="absolute top-5 right-5">
+      <a href="https://linkfeed.net/{{ .UserHash }}" id="userprofile" class><svg
+          xmlns="http://www.w3.org/2000/svg"
+          xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1"
+          x="0px" y="0px" viewBox="0 0 512 512"
+          style="enable-background:new 0 0 512 512;" xml:space="preserve"
+          width="24" height="24">
+          <g><circle cx="256" cy="128" r="128" />
+            <path
+              d="M256,298.667c-105.99,0.118-191.882,86.01-192,192C64,502.449,73.551,512,85.333,512h341.333   c11.782,0,21.333-9.551,21.333-21.333C447.882,384.677,361.99,298.784,256,298.667z" />
+          </g></svg></a>
+    </span>
+    <div class="container mx-auto p-4">
+
+      <br><br>
+      <input type="text"
+        class="focus:outline-none focus:ring-transparent w-full border border-2 p-2 border-black rounded-lg"
+        id="urlInput" readonly /> <br />
+      <br />
+      <input type="text"
+        class="focus:outline-none focus:ring-transparent w-full  border border-2 p-2 border-black rounded-lg"
+        id="titleInput" placeholder="optional title" /> <br />
+      <br />
+      <div class="text-center">
+        <small id="errorMessage" class></small>
+      </div>
+      <br />
+      <span id="pageTitle"></span>
+      <span id="pageDescription"></span>
+      <button
+        class="w-full border border-2 border-black bg-black text-white hover:bg-white hover:text-black font-bold py-4 rounded-lg"
+        id="submitBtn">submit</button>
+      <script src="popup.js"></script>
+    </div>
+  </body>
+</html>
